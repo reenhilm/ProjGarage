@@ -15,7 +15,40 @@
 
             garageHandler.UnparkVehicle("ABC222"); //<- röda bussen
 
-            //garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+            garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
+            garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
+
 
             Console.WriteLine("Red vehicles:");
             Console.Write(garageHandler.GetRedVehiclesList());

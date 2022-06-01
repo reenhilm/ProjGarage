@@ -7,20 +7,27 @@ namespace ProjGarage
     {
         private T[] itemArr;
         public int Length { get; private set; } = 0!;
+        private int capacity;
 
         //public T this[int index] => itemArr[index];
 
         public Garage(int capacity)
         {
             this.itemArr = new T[capacity];
+            this.capacity = capacity;
         }
 
-        public void Add(T item) => this.itemArr[Length++] = item;
+        public void Add(T item)
+        {
+            //TODO return success
+            if (Length < capacity)
+                this.itemArr[Length++] = item;
+        }
 
         public void Remove(T item)
         {
             //TODO kanske onödigt att gå igenom hela arrayen när vi vet att Licenseplate är unikt och bara ska finnas med 1 gång
-            itemArr = itemArr.Where(val => val?.Licenseplate != item.Licenseplate).ToArray();
+            itemArr = itemArr.MergeWith(itemArr.Where(val => val?.Licenseplate != item.Licenseplate)).ToArray();
             Length--;
         }
         public IEnumerator<T> GetEnumerator()

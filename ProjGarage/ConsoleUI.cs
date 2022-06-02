@@ -1,6 +1,4 @@
 ﻿internal class ConsoleUI : IUI
 {
-    public ConsoleUI()
-    {
-    }
+    public void Write(string? value) => Console.WriteLine(value);
 }

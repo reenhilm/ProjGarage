@@ -52,30 +52,28 @@ namespace ProjGarage
             Garage.Remove(vehicle);
         }
 
-        public StringBuilder GetVehiclesList()
+        public void GetVehiclesList(Action<string> print)
         {
             StringBuilder sb = new();
             foreach (IVehicle vehicle in Garage)
                 sb.AppendLine(vehicle.ToString());
 
-            return sb;
+            print.Invoke(sb.ToString());
         }
 
-        public StringBuilder GetRedVehiclesList()
+        public void GetRedVehiclesList(Action<string> print)
         {
             StringBuilder sb = new();
 
             var redCars = Garage.Where(n => n.Color == VehicleColor.Red).ToList();
             
             foreach(IVehicle vehicle in redCars)
-            { 
                 sb.AppendLine(vehicle.ToString());
-            }
 
-            return sb;
+            print.Invoke(sb.ToString());
         }
 
-        public StringBuilder GetVehicleTypeAmountList()
+        public void GetVehicleTypeAmountList(Action<string> print)
         {
             StringBuilder sb = new();
 
@@ -90,11 +88,8 @@ namespace ProjGarage
             foreach (var type in groups)
                 sb.AppendLine($"{type.MetricCount} {type.MetricName}");
 
-            return sb;
+            print.Invoke(sb.ToString());
         }
-
-        delegate void addString(string stringToAdd);
-
         public static GarageHandler SmallGarage() => new(10);
         public static GarageHandler MediumGarage() => new(20);
     }

@@ -4,20 +4,17 @@
     {
         private IUI ui;
         private GarageHandler garageHandler;
-        public Manager(IUI consoleUI, GarageHandler garageHandler)
+        public Manager(IUI consoleUI)
         {
             this.ui = consoleUI;
-            this.garageHandler = garageHandler;
+            this.garageHandler = GarageHandler.MediumGarage();
         }
         internal void Start()
         {
             garageHandler.ParkExampleVehicles(); //<- 6st fordon varav 3 röda
-
             garageHandler.UnparkVehicle("ABC222"); //<- röda bussen
-
             garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
             garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
-
             garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
             garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
             garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till
@@ -50,14 +47,14 @@
             garageHandler.UnparkVehicle("ABC666"); //<- röda bussen
 
 
-            Console.WriteLine("Red vehicles:");
-            Console.Write(garageHandler.GetRedVehiclesList());
+            ui.Write("Red vehicles:");
+            garageHandler.GetRedVehiclesList(ui.Write);
 
-            Console.WriteLine("All vehicles:");
-            Console.Write(garageHandler.GetVehiclesList());
+            ui.Write("All vehicles:");
+            garageHandler.GetVehiclesList(ui.Write);
 
-            Console.WriteLine("All vehicletypes and amount:");
-            Console.Write(garageHandler.GetVehicleTypeAmountList());
+            ui.Write("All vehicletypes and amount:");
+            garageHandler.GetVehicleTypeAmountList(ui.Write);
         }
     }
 }

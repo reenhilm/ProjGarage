@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-void Setup()
+void SetupAndStart()
 {
     var ServiceCollection = new ServiceCollection();
     ConfigureServices(ServiceCollection);
@@ -15,4 +15,4 @@ void ConfigureServices(IServiceCollection services)
     services.AddSingleton<Manager>();
 }
 
-Setup();
+SetupAndStart();

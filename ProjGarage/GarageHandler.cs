@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjGarage
 {
-    internal class GarageHandler
+    internal class GarageHandler : IGarageHandler
     {
         public IGarage<IVehicle> Garage { get; set; }
 
@@ -22,7 +22,7 @@ namespace ProjGarage
         }
 
         public void ParkExampleVehicles()
-        {            
+        {
             ParkVehicle(new Car("ABC111") { Color = VehicleColor.Red });
             ParkVehicle(new Car("ABC112"));
             ParkVehicle(new Bus("ABC222") { Color = VehicleColor.Red });
@@ -66,8 +66,8 @@ namespace ProjGarage
             StringBuilder sb = new();
 
             var redCars = Garage.Where(n => n.Color == VehicleColor.Red).ToList();
-            
-            foreach(IVehicle vehicle in redCars)
+
+            foreach (IVehicle vehicle in redCars)
                 sb.AppendLine(vehicle.ToString());
 
             print.Invoke(sb.ToString());
@@ -80,16 +80,17 @@ namespace ProjGarage
             var groups = Garage.GroupBy(n => n.GetType().Name)
                          .Select(n => new
                          {
-                             MetricName = n.Key,
-                             MetricCount = n.Count()
+                             VehicleTypeName = n.Key,
+                             VehicleOfTypeCount = n.Count()
                          })
-                         .OrderBy(n => n.MetricName);
+                         .OrderBy(n => n.VehicleTypeName);
 
             foreach (var type in groups)
-                sb.AppendLine($"{type.MetricCount} {type.MetricName}");
+                sb.AppendLine($"{type.VehicleOfTypeCount} {type.VehicleTypeName}");
 
             print.Invoke(sb.ToString());
         }
+        public static GarageHandler MiniGarage() => new(1);
         public static GarageHandler SmallGarage() => new(10);
         public static GarageHandler MediumGarage() => new(20);
     }

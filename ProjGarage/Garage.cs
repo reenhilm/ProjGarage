@@ -22,6 +22,8 @@ namespace ProjGarage
             //TODO return success
             if (Length < capacity)
                 this.itemArr[Length++] = item;
+            else
+                throw new ArgumentOutOfRangeException();
         }
 
         public void Remove(T item)

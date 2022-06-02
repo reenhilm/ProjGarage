@@ -3,14 +3,17 @@
     internal class Manager
     {
         private IUI ui;
-        private GarageHandler garageHandler;
+        private IGarageHandler? garageHandler;
         public Manager(IUI consoleUI)
         {
-            this.ui = consoleUI;
-            this.garageHandler = GarageHandler.MediumGarage();
+            this.ui = consoleUI;            
         }
         internal void Start()
         {
+            //Fråga vilken storlek
+
+            //Fråga om man vill ladda tidigare garage
+            this.garageHandler = GarageHandler.SmallGarage();
             garageHandler.ParkExampleVehicles(); //<- 6st fordon varav 3 röda
             garageHandler.UnparkVehicle("ABC222"); //<- röda bussen
             garageHandler.ParkOneMoreExampleVehicle(); //<- en röd motorcykel till

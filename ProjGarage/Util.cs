@@ -25,14 +25,6 @@ namespace ProjGarage
             while (!plate.IsValid());
             return plate;
         }
-        /// <summary>
-        /// returns true if users replies y or Y. False if users replies n or N. (Endless loop)
-        /// </summary>
-        /// <param name="question"></param>
-        /// <param name="questionName"></param>
-        /// <param name="print"></param>
-        /// <param name="getLine"></param>
-        /// <returns></returns>
         public static bool AskUserWantsYes(string question, Action<string> print, Func<string?> getLine)
         {
             string line;
@@ -89,7 +81,7 @@ namespace ProjGarage
             while (true)
             {
                 print?.Invoke(Language.ValidColorsEnglish);
-                (Enum.GetNames(typeof(VehicleColor))).ToList().ForEach(x => print?.Invoke(x));
+                Enum.GetNames<VehicleColor>().ToList().ForEach(x => print?.Invoke(x));
                 print?.Invoke(question);
                 string line = getLine?.Invoke() ?? String.Empty;
 
@@ -102,7 +94,7 @@ namespace ProjGarage
             }
         }
 
-        public static IEnumerable<Type> AllTypes = new List<Type>()
+        private static List<Type> AllTypes = new()
         {
             typeof(Airplane),
             typeof(Boat),
@@ -111,11 +103,11 @@ namespace ProjGarage
             typeof(Motorcycle),
             typeof(Vehicle)
         };
-        public static Type AskForType(string question, string questionName, Action<string> print, Func<string> getLine)
+        public static string AskForTypeName(string question, string questionName, Action<string> print, Func<string> getLine)
         {
             while (true)
             {
-                List<Type> allTypes = AllTypes.ToList();
+                List<Type> allTypes = AllTypes;
                 print?.Invoke(Language.ValidTypesEnglish);
                 allTypes.ForEach(x => print?.Invoke(x.Name));
                 print?.Invoke(question);
@@ -125,7 +117,7 @@ namespace ProjGarage
                 {
                     Type? type = allTypes.FirstOrDefault(x => x.Name.ToUpper() == line.ToUpper().Trim());
                     if(type != null)
-                        return type;
+                        return type.Name;
                 }
                 print?.Invoke(string.Concat(Language.MustEnterValidEnglish + questionName));
             }

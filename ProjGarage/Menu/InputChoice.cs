@@ -10,29 +10,13 @@ namespace ProjGarage.Menu
     {
         public InputChoice(string selectedinput)
         {
-            if (int.TryParse(selectedinput, out int iSelectedInput))
-            {
-                List<int> validSelections = new ();
-                foreach (int i in Enum.GetValues(typeof(InputEnum)))
-                    validSelections.Add(i);
-
-                if (validSelections.IndexOf(iSelectedInput) != -1)
-                    Input = (InputEnum)Enum.Parse(typeof(InputEnum), iSelectedInput.ToString());
-                else
-                    Input = InputEnum.Invalid;
-            }
+            if (Enum.TryParse<InputEnum>(selectedinput, true, out InputEnum parsedEnum))
+                Input = parsedEnum;
             else
                 Input = InputEnum.Invalid;
         }
-
-
         public InputEnum Input { get; private set; }
-        public string Description {
-            get
-            {
-                return GetDescriptionForInput(Input);
-            }
-        }
+        public string Description => GetDescriptionForInput(Input);
 
         public static string GetDescriptionForInput(InputEnum input)
         {

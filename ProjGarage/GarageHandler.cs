@@ -90,8 +90,8 @@ namespace ProjGarage
 
             if (Util.AskUserWantsYes($"{Language.DoYouWantEnglish} {Language.TypeOfVehicleEnglish}", print, getInput))
             {
-                Type searchItem = Util.AskForType(Language.EnterTypeEnglish, Language.TypeEnglish, print, getInput);
-                vehicles = Garage.Where(n => n.GetType() == searchItem);
+                string searchItem = Util.AskForTypeName(Language.EnterTypeEnglish, Language.TypeEnglish, print, getInput);
+                vehicles = Garage.Where(n => n.GetType().Name == searchItem);
             }
 
             if (Util.AskUserWantsYes($"{Language.DoYouWantEnglish} {Language.ColorOfVehicleEnglish}", print, getInput))

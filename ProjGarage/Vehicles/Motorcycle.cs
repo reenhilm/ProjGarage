@@ -3,7 +3,7 @@
     internal class Motorcycle : Vehicle
     {
         public int CylinderVolume { get; set; }
-        public Motorcycle(string licenseplate) : base(licenseplate)
+        public Motorcycle(LicensePlate licenseplate) : base(licenseplate)
         {
         }
     }

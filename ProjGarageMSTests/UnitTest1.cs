@@ -9,10 +9,10 @@ namespace ProjGarageMSTests
             //Arrange
 
             //Act and Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => testar());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Testar());
         }
 
-        private void testar()
+        private void Testar()
         {
             throw new ArgumentOutOfRangeException("coolt");
         }

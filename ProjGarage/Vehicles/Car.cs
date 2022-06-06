@@ -3,7 +3,7 @@
     internal class Car : Vehicle
     {
         public CarFuelType FuelType { get; set; }
-        public Car(string licenseplate) : base(licenseplate)
+        public Car(LicensePlate licenseplate) : base(licenseplate)
         {
         }
     }

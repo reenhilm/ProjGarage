@@ -3,7 +3,7 @@
     internal class Bus : Vehicle
     {
         public int NumberOfSeats { get; set; }
-        public Bus (string licenseplate) : base(licenseplate)
+        public Bus (LicensePlate licenseplate) : base(licenseplate)
         {
         }
     }

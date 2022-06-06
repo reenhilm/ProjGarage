@@ -23,22 +23,22 @@ namespace ProjGarage
 
         public void ParkExampleVehicles()
         {
-            ParkVehicle(new Car("ABC111") { Color = VehicleColor.Red });
-            ParkVehicle(new Car("ABC112"));
-            ParkVehicle(new Bus("ABC222") { Color = VehicleColor.Red });
-            ParkVehicle(new Motorcycle("ABC333"));
-            ParkVehicle(new Boat("ABC444"));
-            ParkVehicle(new Airplane("ABC555") { Color = VehicleColor.Red });
+            ParkVehicle(new Car(new LicensePlate("ABC111")) { Color = VehicleColor.Red, WheelAmount = 3 });
+            ParkVehicle(new Car(new LicensePlate("ABC112")));
+            ParkVehicle(new Bus(new LicensePlate("BBB222")) { Color = VehicleColor.Red });
+            ParkVehicle(new Motorcycle(new LicensePlate("CCC333")));
+            ParkVehicle(new Boat(new LicensePlate("DDD444")));
+            ParkVehicle(new Airplane(new LicensePlate("EEE555")) { Color = VehicleColor.Red });
         }
 
         public void ParkOneMoreExampleVehicle()
         {
-            ParkVehicle(new Motorcycle("ABC666") { Color = VehicleColor.Red });
+            ParkVehicle(new Motorcycle(new LicensePlate("FFF666")) { Color = VehicleColor.Red });
         }
 
         public void UnparkVehicle(string Licenseplate)
         {
-            Vehicle v = new(Licenseplate);
+            Vehicle v = new(new LicensePlate(Licenseplate));
             UnparkVehicle(v);
         }
 
@@ -73,6 +73,47 @@ namespace ProjGarage
             print.Invoke(sb.ToString());
         }
 
+        public bool GetVehicleByLicencePlate(Action<string> print, string LicensePlate)
+        {
+            var vehicle = Garage.FirstOrDefault(n => n.Licenseplate.Value == LicensePlate);
+            if (vehicle != null)
+            { 
+                print.Invoke(vehicle.ToString());
+                return true;
+            }
+            else
+                return false;
+        }
+        public bool GetVehiclesByProperty(Action<string> print, Func<string> getInput)
+        {
+            IEnumerable<IVehicle> vehicles = null!;
+
+            if (Util.AskUserWantsYes($"{Language.DoYouWantEnglish} {Language.TypeOfVehicleEnglish}", print, getInput))
+            {
+                Type searchItem = Util.AskForType(Language.EnterTypeEnglish, Language.TypeEnglish, print, getInput);
+                vehicles = Garage.Where(n => n.GetType() == searchItem);
+            }
+
+            if (Util.AskUserWantsYes($"{Language.DoYouWantEnglish} {Language.ColorOfVehicleEnglish}", print, getInput))
+            {
+                VehicleColor searchItem = Util.AskForColor(Language.EnterColorEnglish, Language.ColorEnglish, print, getInput);
+                vehicles = Garage.Where(n => n.Color == searchItem);
+            }
+
+            if (Util.AskUserWantsYes($"{Language.DoYouWantEnglish} {Language.WheelsOfVehicleEnglish}", print, getInput))
+            {
+                int searchItem = Util.AskForInt(Language.EnterAmountWheelsEnglish, Language.WheelsAmountEnglish, print, getInput);
+                vehicles = Garage.Where(n => n.WheelAmount == searchItem);
+            }
+
+            if (vehicles == null)
+                return false;
+            else
+            {
+                vehicles.ToList().ForEach(vehicle => print.Invoke(vehicle.ToString()));
+                return true;
+            }
+        }
         public void GetVehicleTypeAmountList(Action<string> print)
         {
             StringBuilder sb = new();
@@ -90,8 +131,8 @@ namespace ProjGarage
 
             print.Invoke(sb.ToString());
         }
-        public static GarageHandler MiniGarage() => new(1);
-        public static GarageHandler SmallGarage() => new(10);
-        public static GarageHandler MediumGarage() => new(20);
+        //public static GarageHandler MiniGarage() => new(1);
+        //public static GarageHandler SmallGarage() => new(10);
+        //public static GarageHandler MediumGarage() => new(20);
     }
 }

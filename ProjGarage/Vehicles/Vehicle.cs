@@ -2,21 +2,21 @@
 
 namespace ProjGarage.Vehicles
 {
-    internal class Vehicle : IVehicle
+    internal class Vehicle : LicensePlate, IVehicle
     {
-        public string Licenseplate { get; init; }
+        public LicensePlate Licenseplate { get; init; }
 
         public VehicleColor Color { get; set; } = VehicleColor.Unpainted;
         public int WheelAmount { get; set; }
 
-        public Vehicle(string licenseplate)
+        public Vehicle(LicensePlate licenseplate) : base(licenseplate.Value)
         {
-            Licenseplate = licenseplate.ToUpper();
+            this.Licenseplate = licenseplate;
         }
 
         public override string ToString()
         {
-            return Licenseplate;
+            return Value;
         }
     }
 }

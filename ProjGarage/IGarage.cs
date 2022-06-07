@@ -4,7 +4,7 @@
     {
         //T this[int index] { get; }
         int Length { get; }
-        void Add(T vehicle);
-        void Remove(T vehicle);
+        bool Add(T vehicle);
+        bool Remove(T vehicle);
     }
 }

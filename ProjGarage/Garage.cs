@@ -3,6 +3,22 @@ using System.Collections;
 
 namespace ProjGarage
 {
+    internal class DuplicatePlateException : Exception
+    {
+        public DuplicatePlateException()
+        {
+        }
+
+        public DuplicatePlateException(string message)
+            : base(message)
+        {
+        }
+
+        public DuplicatePlateException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
     internal class Garage<T> : IGarage<T> where T : IVehicle
     {
         private T[] itemArr;
@@ -17,20 +33,33 @@ namespace ProjGarage
             this.capacity = capacity;
         }
 
-        public void Add(T item)
+        public bool Add(T item)
         {
-            //TODO return success
+            var HasItem = this.itemArr.FirstOrDefault(val => val?.Licenseplate.Value == item.Licenseplate.Value);
+            if(HasItem != null)
+                throw new DuplicatePlateException(nameof(item));
+
             if (Length < capacity)
                 this.itemArr[Length++] = item;
             else
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(item));
+
+            return true;
         }
 
-        public void Remove(T item)
+        /// <summary>
+        /// removes true if items have been removed
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public bool Remove(T item)
         {
-            //TODO kanske onödigt att gå igenom hela arrayen när vi vet att Licenseplate är unikt och bara ska finnas med 1 gång
-            itemArr = itemArr.MergeWith(itemArr.Where(val => val?.Licenseplate != item.Licenseplate)).ToArray();
-            Length--;
+            int iBefore = itemArr.Count();
+            var newArr = itemArr.Where(val => val?.Licenseplate.Value != item.Licenseplate.Value);
+            int iAfter = newArr.Count();
+            itemArr = itemArr.MergeWith(newArr).ToArray();
+            Length -= (iBefore - iAfter);
+            return iAfter != iBefore;
         }
         public IEnumerator<T> GetEnumerator()
         {

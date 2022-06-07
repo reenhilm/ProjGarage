@@ -1,6 +1,6 @@
 ﻿namespace ProjGarage.Vehicles
 {
-    public class LicensePlate
+    public class LicensePlate : ILicensePlate
     {
         public string Value { get; init; }
         public LicensePlate(string licenseplate)

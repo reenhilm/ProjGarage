@@ -7,7 +7,7 @@ namespace ProjGarage
     {
         private IUI ui;
         private IGarageHandler? garageHandler;
-        bool ExampleCarsParked = false;
+        bool ExampleCarsRun = false;
         public Manager(IUI consoleUI)
         {
             this.ui = consoleUI;            
@@ -43,21 +43,38 @@ namespace ProjGarage
                         break;
                     case InputEnum.Main_FindVehicleByProperty:
                         FindVehicleByProperty();
-                        break;                        
+                        break;
+                    case InputEnum.Main_ParkVehicle:
+                        Main_ParkVehicle();
+                        break;
+                    case InputEnum.Main_UnParkVehicle:
+                        Main_UnParkVehicle();
+                        break;
                 }
             }
             while (inputChoice.Input != InputEnum.Exit);
         }
 
+        private void Main_UnParkVehicle()
+        {
+            var plate = Util.AskForLicensePlate(ui.Write, ui.GetInput);
+            garageHandler!.UnParkVehicle(plate.Value, ui.Write);
+        }
+
+        private void Main_ParkVehicle()
+        {
+            var plate = Util.AskForLicensePlate(ui.Write, ui.GetInput);
+            garageHandler!.ParkVehicle(plate.Value, ui.Write);
+        }
+
         private void FindVehicleByProperty()
         {
-            if(!garageHandler!.GetVehiclesByProperty(ui.Write, ui.GetInput))
-                ui.Write(Language.VNotFoundEnglish);
+            garageHandler!.PrintVehiclesByProperty(ui.Write, ui.GetInput);
         }
 
         private void FindVehicleByLicencePlate()
         {
-            if (!garageHandler!.GetVehicleByLicencePlate(ui.Write, Util.AskForLicensePlate(Language.EnterLicencePlateEnglish, Language.LicencePlateEnglish, ui.Write, getLine: ui.GetInput).Value))
+            if (!garageHandler!.PrintVehicleByLicencePlate(ui.Write, Util.AskForLicensePlate(ui.Write, getLine: ui.GetInput).Value))
                 ui.Write(Language.VNotFoundEnglish);
         }
         private void PrintMainMenu()
@@ -66,15 +83,16 @@ namespace ProjGarage
             //TODO unit test menu is visible
             ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_ListAllVehicles));
             ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_ListVehicleTypes));
-            //ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_AddOrRemoveVechicles));
-            if(!ExampleCarsParked)
+            if (!ExampleCarsRun)
                 ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_PopulateWithExamples));
             ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_FindVehicleByLicensePlate));
             ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_FindVehicleByProperty));
+            ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_ParkVehicle));
+            ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Main_UnParkVehicle));
             ui.Write(InputChoice.GetDescriptionForInput(InputEnum.Exit));
         }
-        internal void ListAllVehicles() => garageHandler!.GetVehiclesList(ui.Write);
-        internal void ListAllVehicleTypes() => garageHandler!.GetVehicleTypeAmountList(ui.Write);
+        internal void ListAllVehicles() => garageHandler!.PrintVehiclesList(ui.Write);
+        internal void ListAllVehicleTypes() => garageHandler!.PrintVehicleTypeAmountList(ui.Write);
         internal void Start()
         {
             //TODO Ask if want to load
@@ -91,8 +109,8 @@ namespace ProjGarage
         }
         private void PopulateWithExamples()
         {
-            garageHandler!.ParkExampleVehicles(); //<- 6st fordon varav 3 röda
-            ExampleCarsParked = true;
+            garageHandler!.ParkExampleVehicles(ui.Write); //<- 6st fordon varav 3 röda
+            ExampleCarsRun = false;
         }
     }
 }

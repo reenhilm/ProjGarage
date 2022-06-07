@@ -13,12 +13,12 @@ namespace ProjGarage
 
     internal static class Util
     {    
-        public static LicensePlate AskForLicensePlate(string question, string questionName, Action<string> print, Func<string?> getLine)
+        public static ILicensePlate AskForLicensePlate(Action<string> print, Func<string?> getLine)
         {
             LicensePlate plate;
             do
             {
-                plate = new(Util.AskForString(question, questionName, print, getLine: getLine));
+                plate = new(Util.AskForString(Language.EnterLicencePlateEnglish, Language.LicencePlateEnglish, print, getLine: getLine));
                 if (!plate.IsValid())
                     plate.InvalidReasons().ForEach(reason => print?.Invoke(reason));
             }

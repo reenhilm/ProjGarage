@@ -19,7 +19,7 @@ namespace ProjGarage
                         ? replacementIterator.Current
                         : sourceIterator.Current;
 
-                // you can remove this loop if you want to preserve source length
+                //you can remove this loop if you want to preserve source length
                 //while (replacementIterator.MoveNext())
                 //    yield return replacementIterator.Current;
             }

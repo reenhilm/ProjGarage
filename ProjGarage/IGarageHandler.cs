@@ -6,15 +6,14 @@ namespace ProjGarage
     {
         IGarage<IVehicle> Garage { get; set; }
 
-        bool GetVehicleByLicencePlate(Action<string> print, string LicensePlate);
-        void GetRedVehiclesList(Action<string> print);
-        void GetVehiclesList(Action<string> print);
-        void GetVehicleTypeAmountList(Action<string> print);
-        void ParkExampleVehicles();
-        void ParkOneMoreExampleVehicle();
-        void ParkVehicle(IVehicle vehicle);
-        void UnparkVehicle(IVehicle vehicle);
-        void UnparkVehicle(string Licenseplate);
-        bool GetVehiclesByProperty(Action<string> print, Func<string> getInput);
+        bool PrintVehicleByLicencePlate(Action<string> print, string LicensePlate);
+        void PrintRedVehiclesList(Action<string> print);
+        void PrintVehiclesList(Action<string> print);
+        void PrintVehicleTypeAmountList(Action<string> print);
+        void ParkExampleVehicles(Action<string> print);
+        void ParkOneMoreExampleVehicle(Action<string> print);
+        void ParkVehicle(string Licenseplate, Action<string> print);
+        void UnParkVehicle(string Licenseplate, Action<string> print);
+        void PrintVehiclesByProperty(Action<string> print, Func<string> getInput);
     }
 }

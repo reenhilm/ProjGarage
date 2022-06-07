@@ -21,38 +21,67 @@ namespace ProjGarage
             this.Garage = garage;
         }
 
-        public void ParkExampleVehicles()
+        public void ParkExampleVehicles(Action<string> print)
+        {           
+            if (!ParkVehicle(new Car(new LicensePlate("ABC111")) { Color = VehicleColor.Red, WheelAmount = 3 }, print))
+                return;
+            if (!ParkVehicle(new Car(new LicensePlate("ABC112")), print))
+                return;
+            if (!ParkVehicle(new Bus(new LicensePlate("BBB222")) { Color = VehicleColor.Red }, print))
+                return;
+            if (!ParkVehicle(new Motorcycle(new LicensePlate("CCC333")), print))
+                return;
+            if (!ParkVehicle(new Boat(new LicensePlate("DDD444")), print))
+                return;
+            if (!ParkVehicle(new Airplane(new LicensePlate("EEE555")) { Color = VehicleColor.Red }, print))
+                return;
+        }
+        public void ParkOneMoreExampleVehicle(Action<string> print)
         {
-            ParkVehicle(new Car(new LicensePlate("ABC111")) { Color = VehicleColor.Red, WheelAmount = 3 });
-            ParkVehicle(new Car(new LicensePlate("ABC112")));
-            ParkVehicle(new Bus(new LicensePlate("BBB222")) { Color = VehicleColor.Red });
-            ParkVehicle(new Motorcycle(new LicensePlate("CCC333")));
-            ParkVehicle(new Boat(new LicensePlate("DDD444")));
-            ParkVehicle(new Airplane(new LicensePlate("EEE555")) { Color = VehicleColor.Red });
+            ParkVehicle(new Motorcycle(new LicensePlate("FFF666")) { Color = VehicleColor.Red }, print);
+        }
+        public void UnParkVehicle(string Licenseplate, Action<string> print) => UnParkVehicle(new Vehicle(new LicensePlate(Licenseplate)), print);
+        private void UnParkVehicle(IVehicle vehicle, Action<string> print)
+        {
+            if(Garage.Remove(vehicle))
+                print.Invoke(Language.VWasUnParkedEnglish);
+
+            else
+                print.Invoke(Language.VNotFoundEnglish);
         }
 
-        public void ParkOneMoreExampleVehicle()
+        public void ParkVehicle(string Licenseplate, Action<string> print) => ParkVehicle(new Vehicle(new LicensePlate(Licenseplate)), print);
+        private bool ParkVehicle(IVehicle vehicle, Action<string> print)
         {
-            ParkVehicle(new Motorcycle(new LicensePlate("FFF666")) { Color = VehicleColor.Red });
-        }
+            string reason = string.Empty;
+            bool bSuccess = false;
+            try
+            {
+                bSuccess = Garage.Add(vehicle);
+            }
+            catch(ArgumentOutOfRangeException e)
+            {
+                bSuccess = false;
+                reason = Language.GarageFullEnglish;
+            }
+            catch(DuplicatePlateException e)
+            {
+                bSuccess = false;
+                reason = Language.VAlreadyParkedEnglish;
+            }
 
-        public void UnparkVehicle(string Licenseplate)
-        {
-            Vehicle v = new(new LicensePlate(Licenseplate));
-            UnparkVehicle(v);
+            if (bSuccess)
+            {
+                print.Invoke(Language.VWasParkedEnglish);
+                return true;
+            }
+            else
+            {
+                print.Invoke(reason);
+                return false;
+            }
         }
-
-        public void ParkVehicle(IVehicle vehicle)
-        {
-            Garage.Add(vehicle);
-        }
-
-        public void UnparkVehicle(IVehicle vehicle)
-        {
-            Garage.Remove(vehicle);
-        }
-
-        public void GetVehiclesList(Action<string> print)
+        public void PrintVehiclesList(Action<string> print)
         {
             StringBuilder sb = new();
             foreach (IVehicle vehicle in Garage)
@@ -61,7 +90,7 @@ namespace ProjGarage
             print.Invoke(sb.ToString());
         }
 
-        public void GetRedVehiclesList(Action<string> print)
+        public void PrintRedVehiclesList(Action<string> print)
         {
             StringBuilder sb = new();
 
@@ -73,18 +102,18 @@ namespace ProjGarage
             print.Invoke(sb.ToString());
         }
 
-        public bool GetVehicleByLicencePlate(Action<string> print, string LicensePlate)
+        public bool PrintVehicleByLicencePlate(Action<string> print, string LicensePlate)
         {
             var vehicle = Garage.FirstOrDefault(n => n.Licenseplate.Value == LicensePlate);
             if (vehicle != null)
-            { 
+            {
                 print.Invoke(vehicle.ToString());
                 return true;
             }
             else
                 return false;
         }
-        public bool GetVehiclesByProperty(Action<string> print, Func<string> getInput)
+        public void PrintVehiclesByProperty(Action<string> print, Func<string> getInput)
         {
             IEnumerable<IVehicle> vehicles = null!;
 
@@ -107,14 +136,11 @@ namespace ProjGarage
             }
 
             if (vehicles == null)
-                return false;
+                print.Invoke(Language.VNotFoundEnglish);
             else
-            {
                 vehicles.ToList().ForEach(vehicle => print.Invoke(vehicle.ToString()));
-                return true;
-            }
         }
-        public void GetVehicleTypeAmountList(Action<string> print)
+        public void PrintVehicleTypeAmountList(Action<string> print)
         {
             StringBuilder sb = new();
 

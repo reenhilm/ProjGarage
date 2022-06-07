@@ -15,6 +15,8 @@ namespace ProjGarage.Menu
         Main_PopulateWithExamples = 4,
         Main_FindVehicleByLicensePlate = 5,
         Main_FindVehicleByProperty = 6,
+        Main_ParkVehicle = 7,
+        Main_UnParkVehicle = 8,
         Invalid = int.MaxValue
     }
 }

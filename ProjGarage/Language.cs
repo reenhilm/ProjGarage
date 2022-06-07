@@ -17,7 +17,9 @@ namespace ProjGarage
         public const string Main_FindVehicleByLicencePlateEnglish = ". Find vehicle by licence plate";
         public const string Main_PopulateWithExamplesEnglish = ". Park example cars in garage";
         public const string Main_FindVehicleByPropertyEnglish = ". Find vehicles by property";
-        
+        public const string Main_UnParkVehicleEnglish = ". Unpark Vehicle";
+        public const string Main_ParkVehicleEnglish = ". Park Vehicle";
+
         public const string ExitEnglish = ". Exit";
 
         //menu replies
@@ -26,7 +28,7 @@ namespace ProjGarage
 
         //questions
         public const string EnterGarageSizeEnglish = "Enter a capacity of parkingspots for the garage you want to create and work with:";
-        public const string EnterLicencePlateEnglish = "Enter a license plate number of a vehicle you want to find:";
+        public const string EnterLicencePlateEnglish = "Enter a license plate number:";
         public const string EnterColorEnglish = "What color is the vehicle?";
         public const string EnterTypeEnglish = "What type is the vehicle?";
         public const string EnterAmountWheelsEnglish = "How many wheels does vehicle have?";        
@@ -60,7 +62,11 @@ namespace ProjGarage
         public const string WheelsAmountEnglish = "wheels amount";       
 
         public const string VNotFoundEnglish = "Vehicle not found";
+        public const string GarageFullEnglish = "Vehicle not added because the garage was full";
+        public const string VAlreadyParkedEnglish = "Vehicle is already parked";
+        public const string VWasUnParkedEnglish = "Vehicle was unparked";
+        public const string VWasParkedEnglish = "Vehicle was parked";
 
-        
+
     }
 }

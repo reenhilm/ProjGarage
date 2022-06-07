@@ -110,7 +110,7 @@ namespace ProjGarage
         private void PopulateWithExamples()
         {
             garageHandler!.ParkExampleVehicles(ui.Write); //<- 6st fordon varav 3 röda
-            ExampleCarsRun = false;
+            ExampleCarsRun = true;
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ProjGarage.Vehicles;
 
-[assembly:InternalsVisibleTo("MainMethods.Tests")]
+[assembly:InternalsVisibleTo("ProjGarageMSTests")]
 namespace ProjGarage
 {
 

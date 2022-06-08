@@ -54,17 +54,17 @@ namespace ProjGarage
         private bool ParkVehicle(IVehicle vehicle, Action<string> print)
         {
             string reason = string.Empty;
-            bool bSuccess = false;
+            bool bSuccess;
             try
             {
                 bSuccess = Garage.Add(vehicle);
             }
-            catch(ArgumentOutOfRangeException e)
+            catch(ArgumentOutOfRangeException)
             {
                 bSuccess = false;
                 reason = Language.GarageFullEnglish;
             }
-            catch(DuplicatePlateException e)
+            catch(DuplicatePlateException)
             {
                 bSuccess = false;
                 reason = Language.VAlreadyParkedEnglish;

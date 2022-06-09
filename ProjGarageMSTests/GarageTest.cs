@@ -20,17 +20,17 @@ namespace ProjGarageMSTests
         }
 
         [TestMethod]
-        public void Count_InitsZero() => Assert.AreEqual(0, initGarage.Count<IVehicle>());
+        public void Constructor_ItemCount_InitsAsZero() => Assert.AreEqual(0, initGarage.Count<IVehicle>());
 
         [TestMethod]
-        public void Count_IncreasesAfterAdd()
+        public void ItemCount_IncreasesAfterAdd()
         {
             initGarage.Add(new Vehicle(new LicensePlate("ABC123")));
             Assert.AreEqual(1, initGarage.Count<IVehicle>());
         }
         
         [TestMethod]
-        public void Count_DecreasesAfterRemove()
+        public void ItemCount_DecreasesAfterRemove()
         {
             initGarage.Add(new Vehicle(new LicensePlate("ABC111")));
             initGarage.Add(new Vehicle(new LicensePlate("ABC222")));
@@ -40,7 +40,7 @@ namespace ProjGarageMSTests
         }
 
         [TestMethod]
-        public void GetEnumerator_FirstFive_AreCorrect()
+        public void GetEnumerator_BledningAddRemoves_ExpectedOrderAndAmount()
         {
             IVehicle car1 = new Vehicle(new LicensePlate("ABC111"));
             initGarage.Add(car1);
@@ -48,13 +48,46 @@ namespace ProjGarageMSTests
             initGarage.Add(car2);
             IVehicle car3 = new Vehicle(new LicensePlate("ABC333"));
             initGarage.Add(car3);
+            //1, 2, 3
+
+            try
+            {
+                //Should not be added since duplicate
+                initGarage.Add(car3);
+                //still: 1, 2, 3
+            }
+            catch
+            {
+            }
+
+            initGarage.Remove(car1);
+            //null, 2, 3
+
+            initGarage.Remove(car1);
+            //still: null, 2, 3
 
             initGarage.Remove(car2);
+            //null, null, 3
+
+            IVehicle car4 = new Vehicle(new LicensePlate("ABC444"));
+            initGarage.Add(car4);
+            IVehicle car5 = new Vehicle(new LicensePlate("ABC555"));
+            initGarage.Add(car5);
+            IVehicle car6 = new Vehicle(new LicensePlate("ABC666"));
+            initGarage.Add(car6);
+            IVehicle car7 = new Vehicle(new LicensePlate("ABC777"));
+            initGarage.Add(car7);
+            IVehicle car8 = new Vehicle(new LicensePlate("ABC888"));
+            initGarage.Add(car8);
+            //4, 5, 3, 6, 7, 8  (since spots 1, 2 was null those got filled first)
+
+            initGarage.Remove(car7);
+            //4, 5, 3, 6, null, 8
 
             IEnumerable weak = initGarage.AsWeakEnumerable();
-            var sequence = weak.Cast<ProjGarage.Vehicles.Vehicle>().Take(2).ToArray();
+            var sequence = weak.Cast<ProjGarage.Vehicles.Vehicle>().Take(10).ToArray();
             CollectionAssert.AreEqual(sequence,
-                new[] { car1, car3 }, new CarComparer());
+                new[] { car4, car5, car3, car6, car8 }, new CarComparer());
         }
     }
 

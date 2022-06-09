@@ -1,26 +1,12 @@
 ﻿using ProjGarage.Vehicles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjGarage
 {
     internal class GarageHandler : IGarageHandler
     {
         public IGarage<IVehicle> Garage { get; set; }
-
-        public GarageHandler(int capacity)
-        {
-            this.Garage = new Garage<IVehicle>(capacity);
-        }
-
-        public GarageHandler(IGarage<IVehicle> garage)
-        {
-            this.Garage = garage;
-        }
-
+        public GarageHandler(int capacity) => this.Garage = new Garage<IVehicle>(capacity);
+        public GarageHandler(IGarage<IVehicle> garage) => this.Garage = garage;
         public void ParkExampleVehicles(Action<string> print)
         {           
             if (!ParkVehicle(new Car(new LicensePlate("ABC111")) { Color = VehicleColor.Red, WheelAmount = 3 }, print))
@@ -36,10 +22,7 @@ namespace ProjGarage
             if (!ParkVehicle(new Airplane(new LicensePlate("EEE555")) { Color = VehicleColor.Red }, print))
                 return;
         }
-        public void ParkOneMoreExampleVehicle(Action<string> print)
-        {
-            ParkVehicle(new Motorcycle(new LicensePlate("FFF666")) { Color = VehicleColor.Red }, print);
-        }
+        public void ParkOneMoreExampleVehicle(Action<string> print) => ParkVehicle(new Motorcycle(new LicensePlate("FFF666")) { Color = VehicleColor.Red }, print);
         public void UnParkVehicle(string Licenseplate, Action<string> print) => UnParkVehicle(new Vehicle(new LicensePlate(Licenseplate)), print);
         private void UnParkVehicle(IVehicle vehicle, Action<string> print)
         {
@@ -49,7 +32,6 @@ namespace ProjGarage
             else
                 print.Invoke(Language.VNotFoundEnglish);
         }
-
         public void ParkVehicle(string Licenseplate, Action<string> print) => ParkVehicle(new Vehicle(new LicensePlate(Licenseplate)), print);
         private bool ParkVehicle(IVehicle vehicle, Action<string> print)
         {
@@ -89,7 +71,6 @@ namespace ProjGarage
 
             print.Invoke(sb.ToString());
         }
-
         public void PrintRedVehiclesList(Action<string> print)
         {
             StringBuilder sb = new();
@@ -101,7 +82,6 @@ namespace ProjGarage
 
             print.Invoke(sb.ToString());
         }
-
         public bool PrintVehicleByLicencePlate(Action<string> print, string LicensePlate)
         {
             var vehicle = Garage.FirstOrDefault(n => n.Licenseplate.Value == LicensePlate);
@@ -135,10 +115,12 @@ namespace ProjGarage
                 vehicles = Garage.Where(n => n.WheelAmount == searchItem);
             }
 
-            if (vehicles == null)
+            var vehiclesList = vehicles.ToList();
+
+            if (vehiclesList.Count() == 0)
                 print.Invoke(Language.VNotFoundEnglish);
             else
-                vehicles.ToList().ForEach(vehicle => print.Invoke(vehicle.ToString()));
+                vehiclesList.ForEach(vehicle => print.Invoke(vehicle.ToString()));
         }
         public void PrintVehicleTypeAmountList(Action<string> print)
         {

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using ProjGarage.Vehicles;
 
-[assembly:InternalsVisibleTo("ProjGarageMSTests")]
+[assembly: InternalsVisibleTo("ProjGarageMSTests")]
 namespace ProjGarage
 {
-
     internal static class Util
     {    
         public static ILicensePlate AskForLicensePlate(Action<string> print, Func<string?> getLine)
@@ -93,7 +86,6 @@ namespace ProjGarage
                 print?.Invoke(string.Concat(Language.MustEnterValidEnglish + questionName));
             }
         }
-
         private static List<Type> AllTypes = new()
         {
             typeof(Airplane),

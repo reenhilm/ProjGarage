@@ -3,11 +3,7 @@
     public class LicensePlate : ILicensePlate
     {
         public string Value { get; init; }
-        public LicensePlate(string licenseplate)
-        {
-            Value = licenseplate.ToUpper();
-        }
-
+        public LicensePlate(string licenseplate) => Value = licenseplate.ToUpper();
         public virtual List<string> InvalidReasons()
         {
             if (!IsValid())
@@ -15,7 +11,6 @@
             else
                 return new List<string>();
         }
-
         public bool IsValid() => Value.Length == 6;
     }
 }

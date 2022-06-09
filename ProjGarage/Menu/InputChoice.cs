@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjGarage.Menu
+﻿namespace ProjGarage.Menu
 {
     internal class InputChoice
     {
@@ -17,7 +11,6 @@ namespace ProjGarage.Menu
         }
         public InputEnum Input { get; private set; }
         public string Description => GetDescriptionForInput(Input);
-
         public static string GetDescriptionForInput(InputEnum input)
         {
             //TODO unit test input enum has description
@@ -45,13 +38,7 @@ namespace ProjGarage.Menu
         private readonly static string Main_UnParkVehicleDescription = string.Concat((int)InputEnum.Main_UnParkVehicle, Language.Main_UnParkVehicleEnglish);
         private readonly static string Main_ParkVehicleDescription = string.Concat((int)InputEnum.Main_ParkVehicle, Language.Main_ParkVehicleEnglish);
 
-
-
-
-
         private readonly static string ExitDescription = string.Concat((int)InputEnum.Exit, Language.ExitEnglish);
         private readonly static string InvalidDescription = Language.InvalidEnglish;
-
-
     }
 }

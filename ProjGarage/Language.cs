@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjGarage
+﻿namespace ProjGarage
 {
     internal static class Language
     {
@@ -49,8 +43,6 @@ namespace ProjGarage
         public const string WheelsOfVehicleEnglish = "how many wheels the vehicle has?";
         public const string TypeOfVehicleEnglish = "what type the vehicle is?";
 
-
-
         //unit words beginning
         public const string MustEnterValidEnglish = "You must enter a valid ";
 
@@ -66,7 +58,5 @@ namespace ProjGarage
         public const string VAlreadyParkedEnglish = "Vehicle is already parked";
         public const string VWasUnParkedEnglish = "Vehicle was unparked";
         public const string VWasParkedEnglish = "Vehicle was parked";
-
-
     }
 }

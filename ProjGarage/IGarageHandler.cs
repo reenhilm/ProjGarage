@@ -5,7 +5,6 @@ namespace ProjGarage
     internal interface IGarageHandler
     {
         IGarage<IVehicle> Garage { get; set; }
-
         bool PrintVehicleByLicencePlate(Action<string> print, string LicensePlate);
         void PrintRedVehiclesList(Action<string> print);
         void PrintVehiclesList(Action<string> print);

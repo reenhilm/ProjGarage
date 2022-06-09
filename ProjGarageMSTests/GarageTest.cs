@@ -1,8 +1,6 @@
 using ProjGarage;
 using ProjGarage.Vehicles;
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace ProjGarageMSTests
 {
@@ -12,10 +10,7 @@ namespace ProjGarageMSTests
         Garage<IVehicle> initGarage = null!;
 
         [TestInitialize]
-        public void Init()
-        {
-            initGarage = new(10);
-        }
+        public void Init() => initGarage = new(10);
 
         [TestMethod]
         public void Constructor_CapacityIsLessThanZero_DoesNotThrow()
@@ -25,10 +20,7 @@ namespace ProjGarageMSTests
         }
 
         [TestMethod]
-        public void Count_InitsZero()
-        {
-            Assert.AreEqual(0, initGarage.Count<IVehicle>());
-        }
+        public void Count_InitsZero() => Assert.AreEqual(0, initGarage.Count<IVehicle>());
 
         [TestMethod]
         public void Count_IncreasesAfterAdd()

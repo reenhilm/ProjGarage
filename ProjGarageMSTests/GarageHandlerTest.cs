@@ -1,7 +1,4 @@
 using ProjGarage;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
-using ProjGarage.Vehicles;
 
 namespace ProjGarageMSTests
 {
@@ -11,10 +8,7 @@ namespace ProjGarageMSTests
         GarageHandler initGH = null!;
 
         [TestInitialize]
-        public void Init()
-        {
-            initGH = new(10);
-        }
+        public void Init() => initGH = new(10);
 
         [TestMethod]
         public void PrintVehiclesList_EmptyGarage_EmptyString()

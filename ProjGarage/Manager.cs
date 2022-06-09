@@ -1,5 +1,4 @@
 ﻿using ProjGarage.Menu;
-using ProjGarage.Vehicles;
 
 namespace ProjGarage
 {
@@ -8,11 +7,7 @@ namespace ProjGarage
         private IUI ui;
         private IGarageHandler? garageHandler;
         bool ExampleCarsRun = false;
-        public Manager(IUI consoleUI)
-        {
-            this.ui = consoleUI;            
-        }
-
+        public Manager(IUI consoleUI) => this.ui = consoleUI;            
         private void Exit()
         {
             ui.Write(Language.ExitingEnglish);
@@ -54,24 +49,17 @@ namespace ProjGarage
             }
             while (inputChoice.Input != InputEnum.Exit);
         }
-
         private void Main_UnParkVehicle()
         {
             var plate = Util.AskForLicensePlate(ui.Write, ui.GetInput);
             garageHandler!.UnParkVehicle(plate.Value, ui.Write);
         }
-
         private void Main_ParkVehicle()
         {
             var plate = Util.AskForLicensePlate(ui.Write, ui.GetInput);
             garageHandler!.ParkVehicle(plate.Value, ui.Write);
         }
-
-        private void FindVehicleByProperty()
-        {
-            garageHandler!.PrintVehiclesByProperty(ui.Write, ui.GetInput);
-        }
-
+        private void FindVehicleByProperty() => garageHandler!.PrintVehiclesByProperty(ui.Write, ui.GetInput);
         private void FindVehicleByLicencePlate()
         {
             if (!garageHandler!.PrintVehicleByLicencePlate(ui.Write, Util.AskForLicensePlate(ui.Write, getLine: ui.GetInput).Value))

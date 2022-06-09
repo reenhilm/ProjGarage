@@ -25,7 +25,7 @@ namespace ProjGarage
                     {
                         //Vehicle already existed in the array, check if we have already added vehicle in this iteration and undo it because it should not have been added, then throw
                         if (iIndexUsed != -1)
-                            this.itemArr[iIndexUsed] = default(T);
+                            this.itemArr[iIndexUsed] = default!;
 
                         throw new DuplicatePlateException(nameof(item));
                     }
@@ -57,7 +57,7 @@ namespace ProjGarage
             {
                 if (this.itemArr[i]?.Licenseplate.Value == item.Licenseplate.Value)
                 { 
-                    this.itemArr[i] = default(T)!;
+                    this.itemArr[i] = default!;
                     return true;
                 }
             }

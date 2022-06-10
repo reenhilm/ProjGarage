@@ -17,8 +17,6 @@ namespace ProjGarage
 
             IServiceProvider serviceProvider = ServiceCollection.BuildServiceProvider();
             serviceProvider.GetRequiredService<Manager>().Start();
-
-            IConfiguration config = serviceProvider.GetRequiredService<IConfiguration>();
         }
         private void ConfigureServices(IServiceCollection services)
         {
@@ -26,7 +24,7 @@ namespace ProjGarage
             services.AddSingleton<IUI, ConsoleUI>();
             services.AddSingleton<Manager>();
         }
-        private IConfiguration GetConfig() => new ConfigurationBuilder()
+        private static IConfiguration GetConfig() => new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();        
     }

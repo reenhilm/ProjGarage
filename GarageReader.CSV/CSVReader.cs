@@ -1,24 +1,22 @@
-﻿using VehicleReader.Interface.Vehicles;
+﻿using VehicleReader.Interface;
+using VehicleReader.Interface.Vehicles;
 
 namespace VehicleReader.CSV
 {
-    public class CSVReader //: IVehicleReader
+    public class CSVReader : IVehicleReader
     {
         public ICSVFileLoader FileLoader { get; set; }
-
         public CSVReader()
         {
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "Garage.txt";
             FileLoader = new CSVFileLoader(filePath);
         }
-
         public IEnumerable<IVehicle> GetGarage()
         {
             var fileData = FileLoader.LoadFile();
             var garage = ParseData(fileData);
             return garage;
         }
-
         private List<IVehicle> ParseData(IReadOnlyCollection<string> csvData)
         {
             var vehicles = new List<IVehicle>();

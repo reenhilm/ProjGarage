@@ -7,13 +7,8 @@ namespace VehicleReader.Factory
     public class ReaderFactory
     {
         private IConfiguration Configuration;
-        public ReaderFactory(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
+        public ReaderFactory(IConfiguration configuration) => Configuration = configuration;
         private IVehicleReader? reader;
-
         public IVehicleReader GetReader()
         {
             if (reader != null)

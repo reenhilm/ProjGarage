@@ -1,6 +1,6 @@
-﻿namespace ProjGarage.Vehicles
+﻿namespace VehicleReader.Interface.Vehicles
 {
-    internal interface IVehicle
+    public interface IVehicle
     {
         VehicleColor Color { get; set; }
         LicensePlate Licenseplate { get; init; }

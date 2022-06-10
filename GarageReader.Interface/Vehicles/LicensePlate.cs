@@ -1,4 +1,4 @@
-﻿namespace ProjGarage.Vehicles
+﻿namespace VehicleReader.Interface.Vehicles
 {
     public class LicensePlate : ILicensePlate
     {

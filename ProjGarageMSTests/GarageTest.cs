@@ -1,5 +1,5 @@
 using ProjGarage;
-using ProjGarage.Vehicles;
+using VehicleReader.Interface.Vehicles;
 using System.Collections;
 
 namespace ProjGarageMSTests
@@ -85,7 +85,7 @@ namespace ProjGarageMSTests
             //4, 5, 3, 6, null, 8
 
             IEnumerable weak = initGarage.AsWeakEnumerable();
-            var sequence = weak.Cast<ProjGarage.Vehicles.Vehicle>().Take(10).ToArray();
+            var sequence = weak.Cast<VehicleReader.Interface.Vehicles.Vehicle >().Take(10).ToArray();
             CollectionAssert.AreEqual(sequence,
                 new[] { car4, car5, car3, car6, car8 }, new CarComparer());
         }

@@ -1,6 +1,6 @@
-﻿namespace ProjGarage.Vehicles
+﻿namespace VehicleReader.Interface.Vehicles
 {
-    enum VehicleColor
+    public enum VehicleColor
     {
         Unpainted,
         Red,

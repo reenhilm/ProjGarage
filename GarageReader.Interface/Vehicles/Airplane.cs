@@ -1,6 +1,6 @@
-﻿namespace ProjGarage.Vehicles
+﻿namespace VehicleReader.Interface.Vehicles
 {
-    internal class Airplane : Vehicle
+    public class Airplane : Vehicle
     {
         public int NumberOfEngies { get; set; }
         public Airplane(LicensePlate licenseplate) : base(licenseplate)

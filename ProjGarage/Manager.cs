@@ -1,4 +1,6 @@
-﻿using ProjGarage.Menu;
+﻿using Microsoft.Extensions.Configuration;
+using ProjGarage.Menu;
+using VehicleReader.Interface.Vehicles;
 
 namespace ProjGarage
 {
@@ -6,8 +8,13 @@ namespace ProjGarage
     {
         private IUI ui;
         private IGarageHandler? garageHandler;
+        private IConfiguration configuration;
         bool ExampleCarsRun = false;
-        public Manager(IUI consoleUI) => this.ui = consoleUI;            
+        public Manager(IUI consoleUI, IConfiguration configuration)
+        {
+            this.ui = consoleUI;
+            this.configuration = configuration;
+        }
         private void Exit()
         {
             ui.Write(Language.ExitingEnglish);
@@ -84,10 +91,31 @@ namespace ProjGarage
         internal void Start()
         {
             //TODO Ask if want to load
+            bool UserWantsLoad = true;
+            bool GarageWasLoaded = false;
+            do
+            {
+                UserWantsLoad = Util.AskUserWantsYes("Do you want to load garage from file?", ui.Write, ui.GetInput);
+                if (UserWantsLoad)
+                {
+                    VehicleController vc = new(configuration);
+                    IGarage<IVehicle>? garage = vc.UseReader() as IGarage<IVehicle>;
+                    if (garage != null)
+                    {
+                        this.garageHandler = new GarageHandler(garage);
+                        GarageWasLoaded = true;
+                        UserWantsLoad = false;
+                    }
+                }
+            }
+            while (UserWantsLoad);
 
-            //If not load, Ask what size for new garage and create
-            int iCapacity = Util.AskForInt(Language.EnterGarageSizeEnglish, Language.GarageSizeEnglish, ui.Write, getLine: ui.GetInput);
-            this.garageHandler = new GarageHandler(iCapacity);
+            if(!GarageWasLoaded)
+            { 
+                //If not load, Ask what size for new garage and create
+                int iCapacity = Util.AskForInt(Language.EnterGarageSizeEnglish, Language.GarageSizeEnglish, ui.Write, getLine: ui.GetInput);
+                this.garageHandler = new GarageHandler(iCapacity);
+            }
 
             Menu();
             Exit();          

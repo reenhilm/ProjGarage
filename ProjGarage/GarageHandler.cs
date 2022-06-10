@@ -1,4 +1,4 @@
-﻿using ProjGarage.Vehicles;
+﻿using VehicleReader.Interface.Vehicles;
 
 namespace ProjGarage
 {

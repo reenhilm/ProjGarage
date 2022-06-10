@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using ProjGarage.Vehicles;
+using VehicleReader.Interface.Vehicles;
 
 [assembly: InternalsVisibleTo("ProjGarageMSTests")]
 namespace ProjGarage

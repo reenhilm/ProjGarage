@@ -36,7 +36,7 @@ namespace VehicleReader.Factory
             if (reader is null)
             {
                 throw new InvalidOperationException(
-                    $"Unable to create instance of {readerType} as IPersonReader");
+                    $"Unable to create instance of {readerType} as IVehicleReader");
             }
 
             // Return the data reader

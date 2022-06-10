@@ -25,4 +25,12 @@
     </None>
   </ItemGroup>
 
+	<Target Name="CopyDataReaders" AfterTargets="Build">
+		<ItemGroup>
+			<DataReaders Include="$(ProjectDir)..\ReaderAssemblies\*.*" />
+		</ItemGroup>
+
+		<Copy SourceFiles="@(DataReaders)" DestinationFolder="$(TargetDir)\ReaderAssemblies\" SkipUnchangedFiles="true" />
+	</Target>
+
 </Project>

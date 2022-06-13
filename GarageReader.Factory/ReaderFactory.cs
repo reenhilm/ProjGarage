@@ -30,12 +30,9 @@ namespace VehicleReader.Factory
             // Look for the type
             string? appsettingsReaderTypeName = Configuration["DataReader:ReaderType"];
             
-            //var st = "ProjGarage." + readerTypeName;
-            //Type sometype = Type.GetType(st, false);
-
             Type readerType = readerAssembly.ExportedTypes
                                 .First(t => t.FullName == appsettingsReaderTypeName);
-            //readerType blir: FullName:	"VehicleReader.CSV.CSVReader"
+            //readerType.FullName == "VehicleReader.CSV.CSVReader"
 
 
             //funkar inte, blir null pga den tycker inte det skapade objektet är en IVehicleReader
@@ -45,9 +42,9 @@ namespace VehicleReader.Factory
             //reader = Activator.CreateInstance(assemblyName.FullName!, typeof(CSVReader).FullName!) as IVehicleReader;
 
             //funkar men är ju inte dynamiskt. Väljer vi detta får vi köra en switch/if kring vad vi har i appsettings.json för vilken ReaderType vi vill skapa här (det blir då hårdkodat vilka olika readers som finns)
-            //if(appsettingsReaderTypeName == "VehicleReader.CSV.CSVReader")
-            //    reader = Activator.CreateInstance(typeof(CSVReader)) as IVehicleReader;
-            //OBS att typeof(CSVReader).FullName är exakt samma: "VehicleReader.CSV.CSVReader" som i exemplet ovan som inte funkar
+            if (appsettingsReaderTypeName == "VehicleReader.CSV.CSVReader")
+                reader = Activator.CreateInstance(typeof(CSVReader)) as IVehicleReader;
+            //OBS att: typeof(CSVReader).FullName == "VehicleReader.CSV.CSVReader"(alltså exakt samma som i exemplet ovan som inte funkar)
 
             if (reader is null)
             {

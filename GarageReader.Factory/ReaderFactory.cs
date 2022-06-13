@@ -39,7 +39,7 @@ namespace VehicleReader.Factory
             reader = Activator.CreateInstance(readerType) as IVehicleReader;
 
             //funkar inte heller:
-            //reader = Activator.CreateInstance(assemblyName.FullName!, typeof(CSVReader).FullName!) as IVehicleReader;
+            reader = Activator.CreateInstance("VehicleReader.CSV", typeof(CSVReader).FullName) as IVehicleReader;
 
             //funkar men är ju inte dynamiskt. Väljer vi detta får vi köra en switch/if kring vad vi har i appsettings.json för vilken ReaderType vi vill skapa här (det blir då hårdkodat vilka olika readers som finns)
             if (appsettingsReaderTypeName == "VehicleReader.CSV.CSVReader")

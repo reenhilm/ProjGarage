@@ -19,6 +19,7 @@
         //menu replies
         public const string InvalidEnglish = "Invalid input";
         public const string ExitingEnglish = "Exiting...";
+        public const string FileNotFound = "Garage.txt was not found...";
 
         //questions
         public const string EnterGarageSizeEnglish = "Enter a capacity of parkingspots for the garage you want to create and work with:";

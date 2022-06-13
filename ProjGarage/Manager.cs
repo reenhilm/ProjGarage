@@ -99,7 +99,15 @@ namespace ProjGarage
                 if (UserWantsLoad)
                 {
                     VehicleController vc = new(configuration);
-                    IGarage<IVehicle>? garage = vc.UseReader() as IGarage<IVehicle>;
+                    IGarage<IVehicle>? garage = null;
+                    try
+                    {
+                        garage = vc.UseReader() as IGarage<IVehicle>;
+                    }
+                    catch(System.IO.FileNotFoundException e)
+                    {
+                        ui.Write(Language.FileNotFound);
+                    }
                     if (garage != null)
                     {
                         this.garageHandler = new GarageHandler(garage);

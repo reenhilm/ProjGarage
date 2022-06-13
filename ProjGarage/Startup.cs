@@ -6,10 +6,7 @@ namespace ProjGarage
     public class Startup
     {
         private IConfiguration configuration;
-        public Startup()
-        {
-            configuration = GetConfig();
-        }
+        public Startup() => configuration = GetConfig();
         internal void Setup()
         {
             var ServiceCollection = new ServiceCollection();

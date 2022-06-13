@@ -24,14 +24,7 @@ namespace ProjGarage
         }
         public void ParkOneMoreExampleVehicle(Action<string> print) => ParkVehicle(new Motorcycle(new LicensePlate("FFF666")) { Color = VehicleColor.Red }, print);
         public void UnParkVehicle(string Licenseplate, Action<string> print) => UnParkVehicle(new Vehicle(new LicensePlate(Licenseplate)), print);
-        private void UnParkVehicle(IVehicle vehicle, Action<string> print)
-        {
-            if(Garage.Remove(vehicle))
-                print.Invoke(Language.VWasUnParkedEnglish);
-
-            else
-                print.Invoke(Language.VNotFoundEnglish);
-        }
+        private void UnParkVehicle(IVehicle vehicle, Action<string> print) => print.Invoke(Garage.Remove(vehicle) ? Language.VWasUnParkedEnglish : Language.VNotFoundEnglish);
         public void ParkVehicle(string Licenseplate, Action<string> print) => ParkVehicle(new Vehicle(new LicensePlate(Licenseplate)), print);
         private bool ParkVehicle(IVehicle vehicle, Action<string> print)
         {
@@ -117,7 +110,7 @@ namespace ProjGarage
 
             var vehiclesList = vehicles.ToList();
 
-            if (vehiclesList.Count() == 0)
+            if (vehiclesList.Count == 0)
                 print.Invoke(Language.VNotFoundEnglish);
             else
                 vehiclesList.ForEach(vehicle => print.Invoke(vehicle.ToString()));
@@ -131,8 +124,7 @@ namespace ProjGarage
                          {
                              VehicleTypeName = n.Key,
                              VehicleOfTypeCount = n.Count()
-                         })
-                         .OrderBy(n => n.VehicleTypeName);
+                         });
 
             foreach (var type in groups)
                 sb.AppendLine($"{type.VehicleOfTypeCount} {type.VehicleTypeName}");

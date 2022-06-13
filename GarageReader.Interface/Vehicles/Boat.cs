@@ -2,7 +2,7 @@
 {
     public class Boat : Vehicle
     {
-        public int Length { get; set; }
+        public int Length { get; private set; }
         public Boat(LicensePlate licenseplate) : base(licenseplate)
         {
         }

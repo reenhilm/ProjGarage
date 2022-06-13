@@ -1,2 +1,1 @@
-﻿Startup startup = new();
-startup.Setup();
+﻿new Startup().Setup();

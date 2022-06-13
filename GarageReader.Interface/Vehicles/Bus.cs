@@ -2,7 +2,7 @@
 {
     public class Bus : Vehicle
     {
-        public int NumberOfSeats { get; set; }
+        public int NumberOfSeats { get; private set; }
         public Bus(LicensePlate licenseplate) : base(licenseplate)
         {
         }

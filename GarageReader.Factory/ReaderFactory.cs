@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using VehicleReader.Interface;
 using System.Reflection;
-using VehicleReader.CSV;
+using VehicleReader.Interface;
 
 namespace VehicleReader.Factory
 {
@@ -36,14 +35,14 @@ namespace VehicleReader.Factory
 
 
             //funkar inte, blir null pga den tycker inte det skapade objektet är en IVehicleReader
-            reader = Activator.CreateInstance(readerType) as IVehicleReader;
+            //reader = Activator.CreateInstance(readerType) as IVehicleReader;
 
             //funkar inte heller:
-            reader = Activator.CreateInstance("VehicleReader.CSV", typeof(CSVReader).FullName) as IVehicleReader;
+            reader = Activator.CreateInstance(readerAssembly.GetType(readerType.FullName!)!) as IVehicleReader;
 
             //funkar men är ju inte dynamiskt. Väljer vi detta får vi köra en switch/if kring vad vi har i appsettings.json för vilken ReaderType vi vill skapa här (det blir då hårdkodat vilka olika readers som finns)
-            if (appsettingsReaderTypeName == "VehicleReader.CSV.CSVReader")
-                reader = Activator.CreateInstance(typeof(CSVReader)) as IVehicleReader;
+            //if (appsettingsReaderTypeName == "VehicleReader.CSV.CSVReader")
+            //    reader = Activator.CreateInstance(typeof(CSVReader)) as IVehicleReader;
             //OBS att: typeof(CSVReader).FullName == "VehicleReader.CSV.CSVReader"(alltså exakt samma som i exemplet ovan som inte funkar)
 
             if (reader is null)

@@ -7,18 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GarageReader.Interface\VehicleReader.Interface.csproj" />
+    <ProjectReference Include="..\GarageReader.Interface\VehicleReader.Interface.csproj">
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
 
 	<Target Name="CopyDataReader" AfterTargets="Build">
 		<ItemGroup>
-			<DataReaders Include="$(TargetDir)\*.*"/>
+			<DataReaders Include="$(TargetDir)\*.*" />
 		</ItemGroup>
 
-		<Copy
-		  SourceFiles="@(DataReaders)"
-		  DestinationFolder="$(ProjectDir)..\ReaderAssemblies\"
-		  SkipUnchangedFiles="true" />
+		<Copy SourceFiles="@(DataReaders)" DestinationFolder="$(ProjectDir)..\ReaderAssemblies\" SkipUnchangedFiles="true" />
 	</Target>
 
 </Project>

@@ -13,21 +13,11 @@
         "runtime": {
           "VehicleReader.CSV.dll": {}
         }
-      },
-      "VehicleReader.Interface/1.0.0": {
-        "runtime": {
-          "VehicleReader.Interface.dll": {}
-        }
       }
     }
   },
   "libraries": {
     "VehicleReader.CSV/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "VehicleReader.Interface/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
